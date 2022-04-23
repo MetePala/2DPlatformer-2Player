@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class KapiAnimasyon : MonoBehaviour
 {
     [SerializeField]Animator _anim;
     [SerializeField] GameObject _player1, _player2;
+    [SerializeField] GameObject winCanvas;
+    [SerializeField] Text winScoreText;
     public static bool _kapi1Aktifmi, _kapi2Aktifmi;
     public static int _level=1;
     float _yuksekskor=999;
@@ -16,8 +19,12 @@ public class KapiAnimasyon : MonoBehaviour
 
     private void Start()
     {
+       if(PlayerPrefs.GetFloat("score1")<1)
         PlayerPrefs.SetFloat("score1", 999);
-        PlayerPrefs.SetFloat("score2", 999);
+
+        if (PlayerPrefs.GetFloat("score2") < 1)
+            PlayerPrefs.SetFloat("score2", 999);
+      
     }
 
     private void OnTriggerStay2D(Collider2D col)
@@ -74,8 +81,11 @@ public class KapiAnimasyon : MonoBehaviour
                     {
                         PlayerPrefs.SetFloat("score2", _scoretut);
                     }
-                    _level = 3;
-                    SceneManager.LoadScene("Play");
+                    //  _level = 3;
+                    Time.timeScale = 0;
+                    winScoreText.text= PlayerPrefs.GetFloat("score2").ToString();
+                    winCanvas.SetActive(true);
+                    
                 }
 
             }
