@@ -13,6 +13,13 @@ public class KapiAnimasyon : MonoBehaviour
     float a;
     float timee;
     float _scoretut;
+
+    private void Start()
+    {
+        PlayerPrefs.SetFloat("score1", 999);
+        PlayerPrefs.SetFloat("score2", 999);
+    }
+
     private void OnTriggerStay2D(Collider2D col)
     {
        if(_level==1)

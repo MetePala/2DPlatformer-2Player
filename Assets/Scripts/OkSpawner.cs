@@ -5,10 +5,11 @@ using UnityEngine;
 public class OkSpawner : MonoBehaviour
 {
     [SerializeField] GameObject _ok;
-    
+    [SerializeField] AudioSource _arrowsound;
+     public float time;
     private void FixedUpdate()
     {
-       
+        time += Time.deltaTime;
     }
      void Update()
     {
@@ -20,15 +21,21 @@ public class OkSpawner : MonoBehaviour
 
     void TuzakSpawnStart()
     {
-
-        if (PlayerController._atisyonu.flipX == true)
+       if(time>=0.5f)
         {
-            Instantiate(_ok, transform.position, Quaternion.Euler(0, -17.04f, 196));
+         _arrowsound.Play(0);
+             if (PlayerController._atisyonu.flipX == true)
+                 {
+           
+                      Instantiate(_ok, transform.position, Quaternion.Euler(0, -17.04f, 196));
+                  }
+             else
+                  {
+                      Instantiate(_ok, transform.position,_ok.transform.rotation);
+                  }
+            time = 0;
         }
-        else
-        {
-            Instantiate(_ok, transform.position,_ok.transform.rotation);
-        }
+      
     }
    
   

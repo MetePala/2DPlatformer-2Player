@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public bool IsJumpAction => _rigidbody2D.velocity != Vector2.zero;
     float _attacktime1,_attacktime2 = 0;
     bool _attack1,_attack2 = false;
+    [SerializeField] AudioSource _swordsound;
     void Awake()
     {
         _rigidbody2D = GetComponentInChildren<Rigidbody2D>();
@@ -109,6 +110,7 @@ public class PlayerController : MonoBehaviour
             {
                 if(_attack1==false)
                 {
+                    _swordsound.Play(0);
                     _player1walk.SetBool("__isJump", false);
                     _attack1 = true;
                     _attacktime1 = 0;
@@ -150,6 +152,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (_attack2 == false)
                 {
+                   
                     _player2walk.SetBool("__isJump", false);
                     _attack2 = true;
                     _attacktime2 = 0;
